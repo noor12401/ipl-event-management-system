@@ -1,0 +1,182 @@
+/* Before using the below code, create the database.
+use the below link to create the database and then run the below code one by one.
+CREATE DATABASE ipl_event_management;
+once you have printed the above line and you have "Query OK" then you are ready to go
+*/
+
+
+USE ipl_event_management;
+
+CREATE TABLE IF NOT EXISTS locations (
+location_id INT,
+location_name VARCHAR (50) NOT NULL,
+capacity INT NOT NULL,
+PRIMARY KEY (location_id)
+);
+
+CREATE TABLE IF NOT EXISTS team_owners (
+owners_id INT,
+team_name VARCHAR(50) NOT NULL,
+owner_name VARCHAR(50) NOT NULL,
+email VARCHAR(50) NOT NULL,
+PRIMARY KEY (owners_id)
+);
+
+INSERT INTO locations (location_id, location_name, capacity)
+VALUES (1, 'Mumbai', 132000),
+(2, 'Chennai', 100024),
+(3, 'Ahmedabad', 80000),
+(4, 'Delhi', 65400),
+(5, 'Bengaluru', 60000),
+(6, 'Kolkata', 55000),
+(7, 'Hyderabad', 53583),
+(8, 'Gujrat', 48003);
+
+INSERT INTO team_owners (owners_id, team_name, owner_name , email)
+VALUES (1, 'Mumbai Indians (MI)', 'Mukesh Ambani', 'mukesh.ambani@ril.com'),
+(2, 'Chennai Super Kings (CSK)', 'N Srinivasan', 'md@indiacements.co.in'),
+(3, 'Sunrisers Hyderabad (SRH)', 'Kalanithi Maran', 'tvinfo@sunnetwork.in'),
+(4, 'Punjab Kings (PK)', 'Preity Zinta', 'preityzinta@gmail.com'),
+(5, 'Delhi Capitals (DC)', 'Parth Jindal', 'parth.jindal@jsw.in'),
+(6, 'Rajasthan Royals (RR)', 'Manoj Badale', 'manoj@agilisys.co.uk'),
+(7, 'Royal Challengers Bangalore (RCB)', 'United Spirits Ltd', 'ramachandran.venkatesan@diageo.com'),
+(8, 'Kolkata Knight Riders (KKR)', 'Shah Rukh Khan and Juhi Chawla', 'srkfans@redchillies.com');
+
+CREATE TABLE IF NOT EXISTS matches (
+match_id INT,
+title VARCHAR(30) NOT NULL,
+description VARCHAR(30) NOT NULL,
+match_date VARCHAR(30) NOT NULL,
+winner VARCHAR(50) DEFAULT 'Winner Not Announced',
+location_id INT,
+PRIMARY KEY (match_id),
+FOREIGN KEY (location_id) REFERENCES locations(location_id)
+);
+
+INSERT INTO matches (match_id, title, description, match_date, winner, location_id)
+VALUES (1, 'MI vs RCB', 'Indian Premier League 2021', '9 April 2021', 'RCB', 2),
+(2, 'CSK vs DC', 'Indian Premier League 2021', '10 April 2021', 'DC', 1),
+(3, 'SRH vs KKR', 'Indian Premier League 2021', '11 April 2021', 'KKR', 2),
+(4, 'RR vs PK', 'Indian Premier League 2021', '12 April 2021', 'PK', 1),
+(5, 'KKR vs MI', 'Indian Premier League 2021', '13 April 2021', 'MI', 2),
+(6, 'SRH vs RCB', 'Indian Premier League 2021', '14 April 2021', 'RCB', 2),
+(7, 'RR vs DC', 'Indian Premier League 2021', '15 April 2021', 'RR', 1),
+(8, 'PK vs CSK', 'Indian Premier League 2021', '16 April 2021', 'CSK', 1),
+(9, 'MI vs SRH', 'Indian Premier League 2021', '17 April 2021', 'MI', 2),
+(10, 'RCB vs KKR', 'Indian Premier League 2021', '18 April 2021', 'RCB', 2),
+(11, 'DC vs PK', 'Indian Premier League 2021', '18 April 2021', 'DC', 1),
+(12, 'CSK vs RR', 'Indian Premier League 2021', '19 April 2021', 'CSK', 1),
+(13, 'DC vs MI', 'Indian Premier League 2021', '20 April 2021', 'DC', 2),
+(14, 'PK vs SRH', 'Indian Premier League 2021', '21 April 2021', 'SRH', 2),
+(15, 'KKR vs CSK', 'Indian Premier League 2021', '21 April 2021', 'CSK', 1),
+(16, 'RCB vs RR', 'Indian Premier League 2021', '22 April 2021', 'RCB', 1),
+(17, 'PK vs MI', 'Indian Premier League 2021', '23 April 2021', 'MI', 2),
+(18, 'RR vs KKR', 'Indian Premier League 2021', '24 April 2021', 'KKR', 1),
+(19, 'CSK vs RCB', 'Indian Premier League 2021', '25 April 2021', 'CSK', 1),
+(20, 'SRH vs DC', 'Indian Premier League 2021', '25 April 2021', 'SRH', 2),
+(21, 'PK vs KKR', 'Indian Premier League 2021', '26 April 2021', 'PK', 3),
+(22, 'DC vs RCB', 'Indian Premier League 2021', '27 April 2021', 'DC', 3),
+(23, 'CSK vs SRH', 'Indian Premier League 2021', '28 April 2021', 'SRH', 4),
+(24, 'MI vs RR', 'Indian Premier League 2021', '29 April 2021', 'MI', 4),
+(25, 'DC vs KKR', 'Indian Premier League 2021', '29 April 2021', 'KKR', 3),
+(26, 'PK vs RCB', 'Indian Premier League 2021', '30 April 2021', 'PK', 3),
+(27, 'MI vs CSK', 'Indian Premier League 2021', '1 May 2021', 'MI', 4),
+(28, 'RR vs SRH', 'Indian Premier League 2021', '2 May 2021', 'RR', 4),
+(29, 'DC vs PK', 'Indian Premier League 2021', '2 May 2021', 'PK', 3),
+(30, 'RCB vs KKR', 'Indian Premier League 2021', '3 May 2021', 'KKR', 3),
+(31, 'MI vs SRH', 'Indian Premier League 2021', '4 May 2021', 'SRH', 4),
+(32, 'CSK vs RR', 'Indian Premier League 2021', '5 May 2021', 'CSK', 4),
+(33, 'PK vs RCB', 'Indian Premier League 2021', '6 May 2021', 'RCB', 7),
+(34, 'CSK vs SRH', 'Indian Premier League 2021', '7 May 2021', 'CSK', 8),
+(35, 'DC vs KKR', 'Indian Premier League 2021', '8 May 2021', 'DC', 7),
+(36, 'MI vs RR', 'Indian Premier League 2021', '8 May 2021', 'MI', 8),
+(37, 'PK vs CSK', 'Indian Premier League 2021', '9 May 2021', 'PK', 7),
+(38, 'SRH vs RCB', 'Indian Premier League 2021', '9 May 2021', 'SRH', 8),
+(39, 'KKR vs MI', 'Indian Premier League 2021', '10 May 2021', 'MI', 7),
+(40, 'RR vs DC', 'Indian Premier League 2021', '11 May 2021', 'DC', 8),
+(41, 'KKR vs CSK', 'Indian Premier League 2021', '12 May 2021', 'CSK', 7),
+(42, 'PK vs MI', 'Indian Premier League 2021', '13 May 2021', 'PK', 7),
+(43, 'RR vs SRH', 'Indian Premier League 2021', '13 May 2021', 'RR', 8),
+(44, 'DC vs RCB', 'Indian Premier League 2021', '14 May 2021', 'RCB', 7),
+(45, 'PK vs KKR', 'Indian Premier League 2021', '15 May 2021', 'KKR', 8),
+(46, 'RCB vs RR', 'Indian Premier League 2021', '16 May 2021', 'RR', 7),
+(47, 'MI vs CSK', 'Indian Premier League 2021', '16 May 2021', 'MI', 8),
+(48, 'SRH vs DC', 'Indian Premier League 2021', '17 May 2021', 'DC', 6),
+(49, 'RR vs KKR', 'Indian Premier League 2021', '18 May 2021', 'KKR', 5),
+(50, 'PK vs SRH', 'Indian Premier League 2021', '19 May 2021', 'SRH', 5),
+(51, 'RCB vs MI', 'Indian Premier League 2021', '20 May 2021', 'MI', 6),
+(52, 'SRH vs KKR', 'Indian Premier League 2021', '21 May 2021', 'SRH', 5),
+(53, 'CSK vs DC', 'Indian Premier League 2021', '21 May 2021', 'CSK', 6),
+(54, 'RR vs PK', 'Indian Premier League 2021', '22 May 2021', 'RR', 5),
+(55, 'DC vs MI', 'Indian Premier League 2021', '23 May 2021', 'MI', 6),
+(56, 'CSK vs RCB', 'Indian Premier League 2021', '23 May 2021', 'CSK', 6),
+(57, 'MI vs DC', 'Indian Premier League 2021', '25 May 2021', 'MI', 3),
+(58, 'SRH vs RCB', 'Indian Premier League 2021', '26 May 2021', 'RCB', 3),
+(59, 'CSK vs RCB', 'Indian Premier League 2021', '28 May 2021', 'RCB', 3),
+(60, 'MI vs RCB', 'Indian Premier League 2021', '30 May 2021', 'MI', 3);
+
+CREATE TABLE IF NOT EXISTS users (
+user_id INT,
+user_name VARCHAR(50) NOT NULL,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+age INT NOT NULL,
+gender VARCHAR(50) NOT NULL,
+phone_number BIGINT,
+email VARCHAR(50) NOT NULL,
+password VARCHAR(50) NOT NULL,
+PRIMARY KEY (user_id)
+);
+
+/* Please Note: Phone Numbers used are dummy */
+INSERT INTO users (user_id, user_name, first_name, last_name, age, gender, phone_number, email, password) VALUES
+(1, 'user01', 'Nooruddin', 'Shaikh', 20, 'Male', 8879114831, 'nooruddin.5118032.et@mhssce.ac.in', 'PasswordOne'),
+(2, 'user02', 'Arshad', 'Rangrez', 20, 'Male', 9022279078, 'arshad.5118024.et@mhssce.ac.in', 'PasswordTwo'),
+(3, 'user03', 'Aamir', 'Ansari', 20, 'Male', 7715891721, 'aamir.518001.et@mhssce.ac.in', 'PasswordThree'),
+(4, 'user04', 'Maithili', 'Aggarwal', 21, 'Female', 8220767084, 'maithili.aggarwal@mhssce.ac.in', 'PasswordFour'),
+(5, 'user05', 'Kajal', 'Kumari', 20, 'Female', 902227392, 'kajal.kumari@mhssce.ac.in', 'PasswordFive'),
+(6, 'user06', 'Mansai', 'Pendare', 23, 'Female', 8972637263, 'mansipendari7@mhssce.ac.in', 'PasswordSix'),
+(7, 'user07', 'Zafar', 'Khan', 23, 'Male', 9982637630, 'zafarkhan778@mhssce.ac.in', 'PasswordSeven'),
+(8, 'user08', 'Sameer', 'Ansari', 20, 'Male', 7861230935, 'sameermehboobansari@mhssce.ac.in', 'PasswordEight'),
+(9, 'user09', 'Farooque', 'Shaikh', 20, 'Male', 7003451997, 'farooqueshaikh@mhssce.ac.in', 'PasswordNine'),
+(10, 'user10', 'Nazneem', 'Sayyed', 22, 'Female', 9977834012, 'nazneen.sayyed.786@mhssce.ac.in', 'PasswordTen'),
+(11, 'user11', 'Shadab', 'Ansari', 22, 'Male', 9567120090, 'shadabansari009@mhssce.ac.in', 'PasswordOne'),
+(12, 'user12', 'Faiza', 'Dawood', 21, 'Female', 9433837690, 'faizadawood@mhssce.ac.in', 'PasswordEleven'),
+(13, 'user13', 'Shabnam', 'Ranji', 22, 'Female', 9789454090, 'shabnamranji@mhssce.ac.in', 'PasswordTweleve'),
+(14, 'user14', 'Zohra', 'Malik', 20, 'Female', 9667455090, 'zoharamalik@mhssce.ac.in', 'PasswordThirteen'),
+(15, 'user15', 'Rahil', 'Shaikh', 21, 'Male', 8879114989, 'rahildewana@mhssce.ac.in', 'PasswordFourteen');
+
+/*Show All the tables in your database */
+SHOW TABLES;
+
+/* Describe anyone table in your database */
+DESCRIBE team_owners;
+
+/* Print first five rows of your table */
+SELECT * FROM team_owners LIMIT 5;
+
+/* Count How many times CSK has won in this IPL*/
+SELECT COUNT(*) FROM matches WHERE winner='csk';
+
+/* Count all the winners then order it in descending by the winners */
+SELECT winner, COUNT(winner) FROM matches GROUP BY winner ORDER BY COUNT(winner) DESC;
+
+/* Print all the matches that MI and CSK have won in total? */
+SELECT * FROM matches WHERE winner='MI' OR winner='CSK';
+
+/*Print all the dates on which Mumbai Indians have won the match */
+SELECT match_date FROM matches WHERE winner='MI';
+
+/*Print unique combination of matches between two teams */
+SELECT DISTINCT title FROM matches;
+
+/* Print the first and lastname of the poeple whose age is less than 21 */
+SELECT first_name, last_name, age FROM users HAVING age<21;
+
+/* Count Number of people based on the age */
+SELECT age, COUNT(age) age_count FROM users GROUP BY age ORDER BY age_count;
+
+/* Select all thr matches which was played in the stadium having capacity more than 1 lakh and sort them with the match date (Using Subqueries)*/
+SELECT * from matches WHERE location_id IN 
+	( SELECT location_id from locations WHERE capacity>100000
+	) ORDER BY match_date;
